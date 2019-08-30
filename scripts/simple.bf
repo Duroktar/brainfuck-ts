@@ -1,4 +1,6 @@
->+++        a = 3
+# printMode=literal
+
+>           a = 0
 <
 
 ++++++++    loop 8 times

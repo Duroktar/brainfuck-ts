@@ -8,3 +8,8 @@ export type State = {
 export type BfOptions = {
     printMode?: 'fromCharCode' | 'literal'
 };
+
+export type Context = {
+    state: State;
+    options?: BfOptions;
+};

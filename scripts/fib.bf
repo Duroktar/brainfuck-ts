@@ -1,3 +1,5 @@
+# printMode=literal
+
 ~ Set up some Variables
 >           loop    = 0
 >           a       = 0

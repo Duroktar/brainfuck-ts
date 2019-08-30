@@ -16,6 +16,9 @@ else {
     const [options, chars] = parseProgram(source);
 
     bf(initialState(1000, chars), options)
-        .then(exitCode => process.exit(exitCode))
+        .then(exitCode => {
+            console.log()
+            process.exit(exitCode)
+        })
 }
 

@@ -4,12 +4,10 @@ import { matchBrackets } from "./matchBrackets"
 
 export async function bf(state: State, options: BfOptions = {}) {
 
-    const bracketPairs = matchBrackets(state.chars)
-    const gotoMatch = () => {
-        state.charIndex = bracketPairs.get(state.charIndex)
-    }
+    const bracketPairs = matchBrackets(state.chars);
+    const gotoMatch = () => state.charIndex = bracketPairs.get(state.charIndex);
 
-    let char;
+    let char: string = '';
     for (state.charIndex = 0; state.charIndex < state.chars.length; state.charIndex++) {
         char = state.chars[state.charIndex]
         switch(char) {
@@ -40,6 +38,7 @@ export async function bf(state: State, options: BfOptions = {}) {
             //      jump it back to the command after the matching [ command
             case ']': state.tape[state.tapeIndex] !== 0 && gotoMatch(); break;
 
+            // $    Shortcut added for debugging purposes. Not a standard feat.
             case '$': debug(state); break;
             default : continue;
         }
