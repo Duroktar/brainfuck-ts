@@ -1,20 +1,22 @@
 {
-  "name": "brainfuck",
+  "name": "@trabpukcip/brainfuck",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "build": "tsc",
     "start:dev": "nodemon index.js",
-    "start": "ts-node bf.ts"
+    "start:repl": "nodemon build/repl.js",
+    "start": "node index.js"
   },
   "dependencies": {
+    "console-table-printer": "^1.0.0-beta20",
     "nodemon": "^1.19.1",
     "ts-node": "^8.3.0",
     "ts-node-dev": "^1.0.0-pre.42",
     "typescript": "^3.5.3"
   },
   "devDependencies": {
-    "@types/node": "12.7.2"
+    "@types/node": "12.7.3"
   }
 }

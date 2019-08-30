@@ -1,8 +1,9 @@
->           a = 0
+>+++        a = 3
 <
 
 ++++++++    loop 8 times
 [
-    print then increment 'a'
-    > . + <
+    increment and print 'a' then decrement 'loop'
+    > +.
+    < -
 ]
