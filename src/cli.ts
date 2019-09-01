@@ -2,6 +2,7 @@ import { readFileSync } from "fs"
 import { extname } from "path"
 import { initialState } from "./lib/initialState"
 import { bf } from "./lib/bf"
+import { print } from "./lib/io";
 import { parseProgram } from "./lib/parseProgram";
 
 const fileName = process.argv[process.argv.length - 1]
@@ -15,7 +16,7 @@ else {
 
     const [options, chars] = parseProgram(source);
 
-    bf(initialState(1000, chars), options)
+    bf(initialState(1000, chars), options, print)
         .then(exitCode => {
             console.log()
             process.exit(exitCode)

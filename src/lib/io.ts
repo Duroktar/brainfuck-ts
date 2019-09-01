@@ -1,7 +1,10 @@
-process.stdin.setEncoding('utf8');
 import { State } from "../types";
 import { BfOptions } from "../types";
 import { Table } from 'console-table-printer';
+
+try {
+    process.stdin.setEncoding('utf8');
+} catch {}
 
 // This function reads only one line on console synchronously. After pressing
 // `enter` key the console will stop listening for data.

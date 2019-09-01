@@ -1,0 +1,31 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body, #root {
+    display: flex;
+    flex-direction: column;
+}
+
+form {
+    position: relative;
+}
+
+#root {
+    height: 100%;
+}
+
+.content {
+    flex: 1 0 auto;
+}
+#copy {
+    position: absolute;
+    top: 22px;
+    z-index: 10;
+    right: 8px;
+}
+footer {
+    flex-shrink: 0;
+}

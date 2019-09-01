@@ -13,3 +13,5 @@ export type Context = {
     state: State;
     options?: BfOptions;
 };
+
+export type Print = (val: number, options: BfOptions) => any

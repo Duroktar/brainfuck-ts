@@ -1,8 +1,8 @@
-import { print, debug, readlineSync } from "./io"
-import { State, BfOptions } from "../types"
+import { debug, readlineSync } from "./io"
+import { State, BfOptions, Print } from "../types"
 import { matchBrackets } from "./matchBrackets"
 
-export async function bf(state: State, options: BfOptions = {}) {
+export async function bf(state: State, options: BfOptions = {}, print: Print) {
 
     const bracketPairs = matchBrackets(state.chars);
     const gotoMatch = () => state.charIndex = bracketPairs.get(state.charIndex);
