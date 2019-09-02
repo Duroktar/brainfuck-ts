@@ -1,44 +1,8 @@
 {
-  "name": "@trabpukcip/brainfuck",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "scripts": {
-    "build": "tsc",
-    "start:dev": "nodemon index.js",
-    "start:repl": "nodemon build/repl.js",
-    "start": "node index.js",
-    "webpack": "webpack-dev-server"
-  },
-  "dependencies": {
-    "@babel/polyfill": "^7.4.4",
-    "@rebass/forms": "^4.0.5",
-    "@rebass/preset": "^4.0.5",
-    "brace": "^0.11.1",
-    "console-table-printer": "^1.0.0-beta20",
-    "dayjs": "^1.8.16",
-    "emotion-theming": "^10.0.14",
-    "react-ace": "^7.0.4",
-    "react-file-drop": "^0.2.8",
-    "react-inspector": "^3.0.2",
-    "rebass": "^4.0.5"
-  },
+  "name": "root",
+  "private": true,
   "devDependencies": {
-    "@types/node": "12.7.3",
-    "@types/prismjs": "1.16.0",
-    "@types/react": "16.9.2",
-    "@types/react-dom": "16.9.0",
-    "@types/react-inspector": "^3.0.0",
-    "@types/rebass": "4.0.0",
-    "nodemon": "^1.19.1",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "ts-loader": "^6.0.4",
-    "ts-node": "^8.3.0",
-    "ts-node-dev": "^1.0.0-pre.42",
-    "typescript": "^3.6.2",
-    "webpack": "^4.39.3",
-    "webpack-cli": "^3.3.7",
-    "webpack-dev-server": "^3.8.0"
+    "lerna": "^3.16.4",
+    "typescript": "^3.6.2"
   }
 }

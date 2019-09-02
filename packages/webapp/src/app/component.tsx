@@ -1,0 +1,115 @@
+import * as React from 'react';
+import FileDrop from 'react-file-drop';
+import AceEditor from 'react-ace';
+import Switch from "react-switch";
+import { Flex, Box, Text } from "rebass";
+import { Textarea } from '@rebass/forms';
+import { Badge, TimeStamp, FancyButton, ForEach, Spinner, Duroktar } from "./atoms";
+
+import './editor.mode';
+import { Snippets } from './snippets';
+
+type Props = {
+  handleChange: (value: string, event?: any) => void;
+  handleCopy: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  handleDrop: (files: FileList | null, event: React.DragEvent<HTMLDivElement>) => any;
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  dropStyle: React.CSSProperties;
+  setTheme: (theme: string) => void;
+  theme: 'light' | 'dark';
+  input: string;
+  result: any;
+  time: Date | null;
+  examples: Snippets;
+}
+
+export const BrainFuckView = React.memo((props: Props) => (
+  <React.Fragment>
+    <Box className='content' bg="muted">
+      <Flex justifyContent='center' px={12} py={12} bg='muted'>
+        <Text id="title" fontSize={[42]} fontWeight='bold' color='primary'>
+          Brainfuck
+        </Text>
+        <Switch
+          className="theme-toggle"
+          onChange={isSet => props.setTheme(isSet ? 'light' : 'dark')}
+          checked={props.theme === 'light'}
+          onColor="#cecece"
+          offColor="#444343"
+          checkedIcon={<>&nbsp;☀️</>}
+          uncheckedIcon={<>&nbsp;🌛</>}
+        />
+      </Flex>
+      <Flex justifyContent='center' px={12} py={12} bg='muted'>
+        <Text fontSize={[14]} fontWeight='bold' color='secondary'>
+          Click one of the buttons to load up the example source
+        </Text>
+      </Flex>
+      <Flex justifyContent='center' px={12} py={12} bg='muted'>
+        <ForEach items={Object.entries(props.examples)} render={([key, val]) => (
+          <Badge key={key} text={key} onClick={() => props.handleChange(val)} />
+        )} />
+      </Flex>
+      <Flex alignItems='center' px={12} py={12} bg='muted'>
+        <Box style={props.dropStyle} sx={{ mx: 'auto', py: 30, width: '100%' }}>
+          <React.Suspense fallback={<div className="ace_editor-fallback"><Spinner /></div>}>
+            <form onSubmit={props.handleSubmit}>
+              <div id="copy" onClick={props.handleCopy} title="Copy to clipboard">
+                <i className="fa fa-clipboard" aria-hidden="true" data-copytarget="#link" />
+              </div>
+              <AceEditor
+                mode="brainfuck"
+                theme="tomorrow_night"
+                onChange={props.handleChange}
+                name="source"
+                value={props.input}
+                editorProps={{ $blockScrolling: true }}
+                style={{ height: '29.5em', width: '100%' }}
+              />
+              <FancyButton text="Evaluate" type="submit" />
+              <Text sx={{ mt: '14px', float: 'right', width: '50%' }} color='primary'>
+                <Text color='primary'>
+                  Last Evaluated @ <TimeStamp date={props.time} />
+                </Text>
+              </Text>
+            </form>
+          </React.Suspense>
+        </Box>
+      </Flex>
+      <Flex alignItems='center' px={12} py={12} bg='muted'>
+        <Box style={props.dropStyle} sx={{ mx: 'auto', px: 30, width: '100%' }}>
+          <FileDrop onDrop={props.handleDrop}>
+            <Text color='secondary'>
+              Drop your own brainfuck files here to load them
+            </Text>
+          </FileDrop>
+        </Box>
+      </Flex>
+      <Flex alignItems='center' px={12} py={12} bg='muted'>
+        <Box style={props.dropStyle} sx={{ mx: 'auto', px: 30, width: '100%' }}>
+          <Textarea
+            id='result'
+            name='result'
+            value={props.result}
+            rows={8}
+            backgroundColor="white"
+            placeholder="Evaluate code and see the output here"
+            readOnly
+          />
+        </Box>
+      </Flex>
+    </Box>
+    <footer>
+      <Flex justifyContent='center' px={12} py={12} bg="muted">
+        <div style={{maxWidth: '675px', width: '100%'}}>
+          <div></div>
+          <Box sx={{float: 'right'}}>
+            <Text color='primary'>
+              Created by <Duroktar />
+            </Text>
+          </Box>
+        </div>
+      </Flex>
+    </footer>
+  </React.Fragment>
+))

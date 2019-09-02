@@ -1,0 +1,102 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body, #root {
+    display: flex;
+    flex-direction: column;
+}
+
+form {
+    position: relative;
+}
+
+#root {
+    height: 100%;
+}
+
+.content {
+    flex: 1 0 auto;
+}
+#copy {
+    position: absolute;
+    top: 22px;
+    z-index: 10;
+    right: 8px;
+}
+#title {
+    left: 32px;
+    position: relative;
+}
+.theme-toggle {
+    right: -180px;
+    top: 25px;
+}
+.react-switch-handle {
+    background: #00C8F8 !important;
+}
+
+.ace_editor-fallback {
+    height: 22em;
+    width: 100%;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-wrapper {
+    display: inline-block;
+    height: 2em;
+    position: relative;
+}
+
+#button{
+	text-align:center;
+	display:block;
+    position: absolute;
+
+	cursor:pointer;
+	color:#F0F0F0;
+	border-radius:10px;
+	border-bottom:4px solid #0045A6;
+    box-shadow: 2px 2px 6px #999;
+
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+
+	background: -webkit-linear-gradient(#00C8F8, #0067F7);
+    background: -o-linear-gradient(#00C8F8, #0067F7);
+    background: -moz-linear-gradient(#00C8F8, #0067F7);
+    background: linear-gradient(#00C8F8, #0067F7);
+
+	-webkit-transition: background 0.05s linear;
+    -moz-transition: background 0.05s linear;
+    -o-transition: background 0.05s linear;
+    transition: background 0.05s linear;
+
+	background-size:1px 200px;
+
+	transition: all .05s linear;
+}
+
+#button:hover{
+	background-position:100px;
+}
+
+#button:active {
+	box-shadow: 2px 2px 2px #777;
+	border-bottom:1px solid #0045A6;
+	transform: translateY(3px);
+}
+.no-focus-outline a:focus,
+.no-focus-outline button:focus {
+  outline: none;
+}
+footer {
+    flex-shrink: 0;
+}
