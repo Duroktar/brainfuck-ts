@@ -51,7 +51,7 @@ To display the ASCII character "7" we must add 48 to the value 7
 <-.<.+++.------.--------.   world
 >>+.                        !
 `,
-    Fibonacci: `# printMode=literal
+    Fibonacci: `# printMode=literal maxDepth=65000
 
 ~ Set up some Variables
 >           loop    = 0
@@ -117,5 +117,7 @@ To display the ASCII character "7" we must add 48 to the value 7
     > +.
     < -
 ]
+
+$   Special debugging symbol. (Check out the developers console).
 `,
 }

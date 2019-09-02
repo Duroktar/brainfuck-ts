@@ -4,7 +4,7 @@ import AceEditor from 'react-ace';
 import Switch from "react-switch";
 import { Flex, Box, Text } from "rebass";
 import { Textarea } from '@rebass/forms';
-import { Badge, TimeStamp, FancyButton } from "./atoms";
+import { Badge, TimeStamp, FancyButton, If } from "./atoms";
 import { ForEach, Spinner, Duroktar, Legend } from "./atoms";
 import { Snippets } from './snippets';
 
@@ -105,19 +105,21 @@ export const BrainFuckView = React.memo((props: Props) => (
         </Box>
       </Flex>
     </Box>
-    {props.error && (
+    <If condition={props.error} render={error => (
       <Flex alignItems='center' height={0} px={12} py={0} bg='muted'>
-        <Box style={props.dropStyle} height={0} sx={{ mx: 'auto', px: 30, py: 0, width: '100%' }}>
-          <Text sx={{position: 'absolute', mt: '-20px'}} color='red'>{props.error.message}</Text>
+        <Box id='flip' style={props.dropStyle} height={0} sx={{ mx: 'auto', px: 30, py: 0, width: '100%' }}>
+          <div><div>
+            <Text sx={{position: 'absolute'}} color='red'>{error!.message}</Text>
+          </div></div>
         </Box>
       </Flex>
-    )}
+    )} />
     <footer>
       <Flex justifyContent='center' px={12} py={12} bg='muted'>
         <div style={{maxWidth: '675px', width: '100%'}}>
           <Box>
             <Text color="secondary" sx={{cursor: 'pointer'}}>
-              <a onClick={props.handleLegend}>Language reference</a>
+              <a onClick={props.handleLegend}>reference</a>
             </Text>
           </Box>
           <Box sx={{float: 'right'}}>

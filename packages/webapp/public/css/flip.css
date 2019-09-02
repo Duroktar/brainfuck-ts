@@ -1,0 +1,51 @@
+#flip {
+    height: 50px;
+    overflow: hidden;
+    position: relative;
+}
+
+#flip>div>div {
+    color: #fff;
+    padding: 4px 12px;
+    height: 45px;
+    margin-bottom: 45px;
+    display: inline-block;
+}
+
+#flip div:first-child {
+    animation: show 0.2s linear;
+}
+
+@keyframes show {
+    0% {
+        margin-top: -10.5px;
+    }
+
+    15% {
+        margin-top: -9px;
+    }
+
+    30% {
+        margin-top: -7.5px;
+    }
+
+    45% {
+        margin-top: -6px;
+    }
+
+    60% {
+        margin-top: -4.5px;
+    }
+
+    75% {
+        margin-top: -3px;
+    }
+
+    90% {
+        margin-top: -1.5px;
+    }
+
+    100% {
+        margin-top: 0px;
+    }
+}

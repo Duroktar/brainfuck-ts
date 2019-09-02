@@ -41,13 +41,16 @@ export const debug = (state: State) => {
     tape.forEach((v, i) => { row[i+tapeBufferedIndex] = v || '0' });
     chars.forEach((v, i) => { row2[i+charBufferedIndex] = v || '0' });
 
-    const msg = ` TAPE: size=${state.tape.length}; cursor=${state.tapeIndex}; /`;
-    console.log(new Array(msg.length).fill('_').join(''));
-    console.log(msg);
+    console.log(`____________________________`);
+    console.log(`LEGEND: 1st row = Tape Index`)
+    console.log(`        2nd row = Tape Value`)
+    console.log(`        Arrow   = Current Tape Index`)
     const p = new Table(Object.keys(row));
     p.addRow(row);
     p.addRow({ [`${state.tapeIndex}`]: '↑' }, { color: 'green' });
     p.printTable();
+    console.log(` TAPE:  Size    = ${state.tape.length}`);
+    console.log(`        Cursor  = ${state.tapeIndex}`);
 
     // const msg2 = ` CHARS: size=${state.chars.length}; cursor=${state.charIndex} /`;
     // console.log(` CHARS: size=${state.chars.length}; cursor=${state.charIndex}`);
