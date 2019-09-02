@@ -40,6 +40,7 @@ extends React.PureComponent<ContainerProps, State> {
         input={this.state.input}
         result={this.state.result}
         time={this.state.time}
+        error={this.state.error}
         examples={this.state.examples}
       />);
   }
@@ -72,11 +73,12 @@ extends React.PureComponent<ContainerProps, State> {
   public handleDrop = (files: FileList | null) => {
     const file: any = (files || [])[0];
     if (file) {
-      const setOutputText = (txt: string) => {
+      const filedropCallback = (txt: string) => {
         this.setState({ input: txt });
+        this.resetStateCtx();
       };
       file.text()
-        .then((txt: string) => setOutputText(txt))
+        .then((txt: string) => filedropCallback(txt))
         .catch((err: Error) => alert(
           `There was an error processing the uploaded file.\nError: ${err}`));
     }
@@ -84,17 +86,24 @@ extends React.PureComponent<ContainerProps, State> {
   public handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     e.currentTarget.blur();
-    this.setState({ result: '' });
-    this.state.ctx.state = BrainFuckContainer.DEFAULT_STATE.ctx.state;
+    this.setState({ result: '', error: undefined });
     this.repl(this.state.input, this.state.ctx)
       .then(code => this.setState({ returnCode: code, time: new Date() }))
       .catch(err => this.setState({ error: err, time: new Date() }));
   };
   public repl = (cmd: string, context: BF.Context) => {
     const [options, source] = BF.parseProgram(cmd);
-    context.options = { ...context.options, ...options };
-    context.state.chars = source;
-    return BF.bf(context.state, context.options, this.print);
+    return new Promise<number>((resolve) => {
+      this.setState({
+        ctx: {
+          options,
+          state: { ...BF.initialState(30), chars: source },
+        }
+      }, () => {
+        const { options, state } = this.state.ctx;
+        resolve(BF.bf(state, options, this.print));
+      })
+    })
   };
   public print = (val: number, options: BF.BfOptions = {}) => {
     if (options.printMode === 'fromCharCode') {
@@ -130,6 +139,12 @@ extends React.PureComponent<ContainerProps, State> {
   // TODO move all styles to css
   get dropStyle() {
     return { width: 600, color: 'black', padding: 10 };
+  }
+  private resetStateCtx = () => {
+    this.setState({ ctx: {
+      state: BF.initialState(30),
+      options: {},
+    }})
   }
   static DEFAULT_STATE: State = {
     input: '',

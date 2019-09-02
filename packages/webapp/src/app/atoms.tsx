@@ -15,13 +15,13 @@ type BadgeProps = {
 };
 
 export const Badge =
-React.memo(({ color, bg, text, onClick }: BadgeProps) => (
+React.memo(({ text, onClick }: BadgeProps) => (
   <Box
     onClick={onClick}
     sx={{
       display: 'inline-block',
-      color: color || 'white',
-      bg: bg || 'green',
+      color: 'text',
+      bg: 'background',
       px: 2,
       py: 1,
       mx: 1,

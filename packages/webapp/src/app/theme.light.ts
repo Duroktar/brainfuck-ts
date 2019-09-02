@@ -5,9 +5,9 @@
 export const theme = {
     colors: {
         text: "#000",
-        background: "#fff",
-        primary: "#4eaff5",  // blue
-        secondary: "#8b72d8",
+        background: "#FF6C11",
+        primary: "#132848",
+        secondary: "#261447",
         muted: "#e2e2e2",
         gray: "#dddddf",
         highlight: "hsla(205, 100%, 40%, 0.125)"

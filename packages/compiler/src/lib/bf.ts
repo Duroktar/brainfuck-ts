@@ -1,14 +1,19 @@
 import { debug, readlineSync } from "./io"
 import { State, BfOptions, Print } from "../types"
 import { matchBrackets } from "./matchBrackets"
+import { CyclicComplexityError } from "./errors";
 
 export async function bf(state: State, options: BfOptions = {}, print: Print) {
 
     const bracketPairs = matchBrackets(state.chars);
     const gotoMatch = () => state.charIndex = bracketPairs.get(state.charIndex);
 
+    let maxDepth = options.maxDepth || 10_000;
+    let depth = 0;
+
     let char: string = '';
-    for (state.charIndex = 0; state.charIndex < state.chars.length; state.charIndex++) {
+    for (state.charIndex = 0 ; state.charIndex < state.chars.length ; state.charIndex++) {
+
         char = state.chars[state.charIndex]
         switch(char) {
             // >    increment the data pointer (to point to the next cell to the
@@ -42,6 +47,12 @@ export async function bf(state: State, options: BfOptions = {}, print: Print) {
             case '$': debug(state); break;
             default : continue;
         }
+
+        // Prevents freezes. Adjustable in the file header or with a bang command in the repl.
+        if (depth > maxDepth)
+            throw new CyclicComplexityError(maxDepth)
+        else
+            depth++
     }
 
     return 0
