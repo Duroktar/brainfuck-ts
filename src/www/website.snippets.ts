@@ -1,12 +1,7 @@
-export type Snippets = {
-    addition: string;
-    helloWorld: string;
-    fibonacci: string;
-    looping: string;
-}
+export type Snippets = typeof snippets;
 
-export const snippets: Snippets = {
-    addition: `# printMode=literal
+export const snippets = {
+    Addition: `# printMode=literal
 
 ++       Cell c0 = 2
 > +++++  Cell c1 = 5
@@ -29,7 +24,7 @@ To display the ASCII character "7" we must add 48 to the value 7
 ]
 < .        Print out c0 which has the value 55 which translates to "7"!
 `,
-    helloWorld: `# printMode=fromCharCode
+    "Hello World": `# printMode=fromCharCode
 
 ++++++++
 [
@@ -56,7 +51,7 @@ To display the ASCII character "7" we must add 48 to the value 7
 <-.<.+++.------.--------.   world
 >>+.                        !
 `,
-    fibonacci: `# printMode=literal
+    Fibonacci: `# printMode=literal
 
 ~ Set up some Variables
 >           loop    = 0
@@ -111,7 +106,7 @@ To display the ASCII character "7" we must add 48 to the value 7
     < -
 ]
 `,
-    looping: `# printMode=literal
+    Looping: `# printMode=literal
 
 >           a = 0
 <

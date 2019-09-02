@@ -1,5 +1,9 @@
 var ace = require('brace')
 
+import 'brace/theme/tomorrow_night';
+import "brace/ext/language_tools";
+import 'brace/ext/spellcheck';
+
 ace.define("ace/mode/brainfuck_highlight_rules",["require","exports","module","ace/lib/oop","ace/mode/text_highlight_rules"], function(acequire, exports, module) {
 "use strict";
 
