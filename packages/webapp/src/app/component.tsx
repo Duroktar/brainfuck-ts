@@ -4,7 +4,8 @@ import AceEditor from 'react-ace';
 import Switch from "react-switch";
 import { Flex, Box, Text } from "rebass";
 import { Textarea } from '@rebass/forms';
-import { Badge, TimeStamp, FancyButton, ForEach, Spinner, Duroktar } from "./atoms";
+import { Badge, TimeStamp, FancyButton } from "./atoms";
+import { ForEach, Spinner, Duroktar, Legend } from "./atoms";
 import { Snippets } from './snippets';
 
 import './editor.mode';
@@ -13,12 +14,14 @@ type Props = {
   handleChange: (value: string, event?: any) => void;
   handleCopy: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   handleDrop: (files: FileList | null, event: React.DragEvent<HTMLDivElement>) => any;
+  handleLegend: () => void;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   dropStyle: React.CSSProperties;
   setTheme: (theme: string) => void;
   theme: 'light' | 'dark';
   input: string;
   result: any;
+  showLegend: boolean;
   time: Date | null;
   examples: Snippets;
   error?: Error;
@@ -26,6 +29,7 @@ type Props = {
 
 export const BrainFuckView = React.memo((props: Props) => (
   <React.Fragment>
+    {props.showLegend && <Legend onClick={props.handleLegend} />}
     <Box className='content' bg='muted'>
       <Flex justifyContent='center' px={12} py={12} bg='muted'>
         <Text id='title' fontSize={[42]} fontWeight='bold' color='primary'>
@@ -93,7 +97,8 @@ export const BrainFuckView = React.memo((props: Props) => (
             name='result'
             value={props.result}
             rows={8}
-            backgroundColor='white'
+            backgroundColor='gray'
+            color='text'
             placeholder='Evaluate code and see the output here'
             readOnly
           />
@@ -110,7 +115,11 @@ export const BrainFuckView = React.memo((props: Props) => (
     <footer>
       <Flex justifyContent='center' px={12} py={12} bg='muted'>
         <div style={{maxWidth: '675px', width: '100%'}}>
-          <div></div>
+          <Box>
+            <Text color="secondary" sx={{cursor: 'pointer'}}>
+              <a onClick={props.handleLegend}>Language reference</a>
+            </Text>
+          </Box>
           <Box sx={{float: 'right'}}>
             <Text color='primary'>
               Created by <Duroktar />

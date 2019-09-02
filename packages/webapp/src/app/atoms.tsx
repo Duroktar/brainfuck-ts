@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Button, Link } from 'rebass';
+import { Box, Button, Link, Flex, Text } from 'rebass';
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { isNull, isNullOrUndefined } from 'util';
@@ -84,6 +84,35 @@ export const Duroktar = React.memo(() => (
   >
     duroktar
   </Link>
+))
+
+type LegendProps = { onClick }
+export const Legend = React.memo(({ onClick }: LegendProps) => (
+  <Flex sx={{position: 'absolute', width: '100%' }} style={{top: 0, left: 0, right: 0, bottom: 0}} justifyContent='center' alignItems='center'>
+    <Box sx={{borderRadius: 8, zIndex: 12}} bg="gray" px={3} py={4} width={550} mt="-20%">
+      <Box width='100%' height={0} color='text'><i className="fa fa-window-close" style={{float: 'right'}} onMouseUp={onClick}></i></Box>
+      <Text mb="6px" fontSize={[ 3, 4, 5 ]} color='primary'>Legend</Text>
+      <Flex justifyContent="space-evenly" sx={{marginBottom: '4px'}}>
+        <Text width="45%" color='text'><Text fontSize={[ 4 ]} color='secondary'>{'>'}</Text> increment the data pointer (to point to the next cell to the right</Text>
+        <Text width="45%" color='text'><Text fontSize={[ 4 ]} color='secondary'>{'<'}</Text> decrement the data pointer (to point to the next cell to the left)</Text>
+      </Flex>
+      <Flex justifyContent="space-evenly" sx={{marginBottom: '4px'}}>
+        <Text width="45%" color='text'><Text fontSize={[ 4 ]} color='secondary'>+</Text> increment (increase by one) the byte at the data pointer</Text>
+        <Text width="45%" color='text'><Text fontSize={[ 4 ]} color='secondary'>-</Text> decrement (decrease by one) the byte at the data pointer</Text>
+      </Flex>
+      <Flex justifyContent="space-evenly" sx={{marginBottom: '4px'}}>
+        <Text width="45%" color='text'><Text fontSize={[ 4 ]} color='secondary'>,</Text> accept a byte of input, store its value in byte at the data pointer</Text>
+        <Text width="45%" color='text'><Text fontSize={[ 4 ]} color='secondary'>.</Text> output the value of the byte at the data pointer</Text>
+      </Flex>
+      <Flex justifyContent="space-evenly" sx={{marginBottom: '4px'}}>
+        <Text width="45%" color='text'><Text fontSize={[ 4 ]} color='secondary'>[</Text> if the byte at the data pointer is zero, then instead of moving the instruction pointer forward to the next command, jump it forward to the command after the matching ] command</Text>
+        <Text width="45%" color='text'><Text fontSize={[ 4 ]} color='secondary'>]</Text> if the byte at the data pointer is nonzero, then instead of moving the instruction pointer forward to the next command, jump it back to the command after the matching [ command</Text>
+      </Flex>
+      <Flex px={2} py={4}>
+        <Text color='text'><Text fontSize={[ 4 ]} color='primary'>$</Text> Shortcut added for debugging purposes. (Not a standard brainfuck feature)</Text>
+      </Flex>
+    </Box>
+  </Flex>
 ))
 
 export const Spinner = React.memo(() => (

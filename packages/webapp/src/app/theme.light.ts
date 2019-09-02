@@ -9,7 +9,7 @@ export const theme = {
         primary: "#132848",
         secondary: "#261447",
         muted: "#e2e2e2",
-        gray: "#dddddf",
+        gray: "#d0d0d0",
         highlight: "hsla(205, 100%, 40%, 0.125)"
     },
     fonts: {

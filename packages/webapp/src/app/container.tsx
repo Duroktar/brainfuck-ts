@@ -17,14 +17,15 @@ type State = {
   result: string;
   time: Date | null;
   examples: Snippets;
+  showLegend: boolean;
 };
 
 export class BrainFuckContainer
 extends React.PureComponent<ContainerProps, State> {
   private STORAGE_KEY = '__bf_storage__theme';
-  public state: State = BrainFuckContainer.DEFAULT_STATE
+  public state: State = BrainFuckContainer.DEFAULT_STATE;
   componentDidMount() {
-    this.loadTheme().then(this.setTheme)
+    this.loadTheme().then(this.setTheme);
   }
   public render() {
     const { component: Component } = this.props;
@@ -34,6 +35,7 @@ extends React.PureComponent<ContainerProps, State> {
         handleChange={this.handleChange}
         handleCopy={this.handleCopy}
         handleDrop={this.handleDrop}
+        handleLegend={this.handleLegend}
         handleSubmit={this.handleSubmit}
         setTheme={this.setTheme}
         theme={this.props.theme}
@@ -42,6 +44,7 @@ extends React.PureComponent<ContainerProps, State> {
         time={this.state.time}
         error={this.state.error}
         examples={this.state.examples}
+        showLegend={this.state.showLegend}
       />);
   }
   public handleCopy = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
@@ -82,6 +85,9 @@ extends React.PureComponent<ContainerProps, State> {
         .catch((err: Error) => alert(
           `There was an error processing the uploaded file.\nError: ${err}`));
     }
+  };
+  public handleLegend = () => {
+    this.setState(state => ({ ...state, showLegend: !state.showLegend }))
   };
   public handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -156,5 +162,6 @@ extends React.PureComponent<ContainerProps, State> {
     result: '',
     time: null,
     examples: snippets,
+    showLegend: false,
   };
 }

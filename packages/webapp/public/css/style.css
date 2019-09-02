@@ -98,6 +98,16 @@ form {
 .no-focus-outline button:focus {
   outline: none;
 }
+.fa-window-close {
+    float: right;
+    zoom: 1.7;
+    margin-top: -10px;
+    cursor: pointer;
+}
+.fa-window-close:active {
+	box-shadow: 1px 1px 1px #777;
+	transform: translateY(1px);
+}
 footer {
     flex-shrink: 0;
 }
