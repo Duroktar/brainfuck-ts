@@ -12,13 +12,14 @@ type BadgeProps = {
   text: string;
   bg?: string;
   color?: string;
+  theme: string;
   onClick?: ReactMouseClickEvent;
 };
 
 export const Badge =
-React.memo(({ text, onClick }: BadgeProps) => (
+React.memo(({ text, onClick, theme }: BadgeProps) => (
   <Box
-    className='badge'
+    className={`badge ${theme}`}
     onClick={onClick}
     sx={{
       display: 'inline-block',
@@ -58,6 +59,7 @@ React.memo((props: FancyButtonProps) => (
     <Button
       id="button"
       sx={{ mt: '8px' }}
+      style={{textShadow: '1px 1px 1px black'}}
       onClick={props.onClick}
       type={props.type}
     >
@@ -107,41 +109,41 @@ export const Legend = React.memo(({ onClick, theme }: LegendProps) => {
     <Flex style={{position: 'absolute', width: '100%', top: 0, left: 0, right: 0, bottom: 0}} justifyContent='center' alignItems='center'>
       <Box id='legend' className={theme} sx={{borderRadius: 8, zIndex: 12}} bg="gray" px={3} py={4} width={550}>
         <Box width='100%' height={0} color='text'><i className="fa fa-window-close" style={{float: 'right'}} onMouseUp={onClick}></i></Box>
-        <Text mb="6px" fontSize={[ 3, 4, 5 ]} color='primary'>{t('legend')}</Text>
+        <Text className={`shadow ${theme}`} mb="6px" fontSize={[ 3, 4, 5 ]} color='primary'>{t('legend')}</Text>
         <Flex justifyContent="space-evenly" sx={{marginBottom: '4px'}}>
-          <Text width="45%" color='text'><Text fontSize={[ 4 ]} color='secondary'>{'>'}</Text> {t('incrementTape')}</Text>
-          <Text width="45%" color='text'><Text fontSize={[ 4 ]} color='secondary'>{'<'}</Text> {t('decrementTape')}</Text>
+          <Text width="45%" color='text'><Text className={`shadow ${theme}`} mb='2px' fontSize={[ 4 ]} color='secondary'>{'>'}</Text> {t('incrementTape')}</Text>
+          <Text width="45%" color='text'><Text className={`shadow ${theme}`} mb='2px' fontSize={[ 4 ]} color='secondary'>{'<'}</Text> {t('decrementTape')}</Text>
         </Flex>
         <Flex justifyContent="space-evenly" sx={{marginBottom: '4px'}}>
-          <Text width="45%" color='text'><Text fontSize={[ 4 ]} color='secondary'>+</Text> {t('incrementByte')}</Text>
-          <Text width="45%" color='text'><Text fontSize={[ 4 ]} color='secondary'>-</Text> {t('decrementByte')}</Text>
+          <Text width="45%" color='text'><Text className={`shadow ${theme}`} mb='2px' fontSize={[ 4 ]} color='secondary'>+</Text> {t('incrementByte')}</Text>
+          <Text width="45%" color='text'><Text className={`shadow ${theme}`} mb='2px' fontSize={[ 4 ]} color='secondary'>-</Text> {t('decrementByte')}</Text>
         </Flex>
         <Flex justifyContent="space-evenly" sx={{marginBottom: '4px'}}>
-          <Text width="45%" color='text'><Text fontSize={[ 4 ]} color='secondary'>,</Text> {t('output')}</Text>
-          <Text width="45%" color='text'><Text fontSize={[ 4 ]} color='secondary'>.</Text> {t('input')}</Text>
+          <Text width="45%" color='text'><Text className={`shadow ${theme}`} mb='2px' fontSize={[ 4 ]} color='secondary'>,</Text> {t('output')}</Text>
+          <Text width="45%" color='text'><Text className={`shadow ${theme}`} mb='2px' fontSize={[ 4 ]} color='secondary'>.</Text> {t('input')}</Text>
         </Flex>
         <Flex justifyContent="space-evenly" sx={{marginBottom: '4px'}}>
-          <Text width="45%" color='text'><Text fontSize={[ 4 ]} color='secondary'>[</Text> {t('openLoop')}</Text>
-          <Text width="45%" color='text'><Text fontSize={[ 4 ]} color='secondary'>]</Text> {t('closeLoop')}</Text>
+          <Text width="45%" color='text'><Text className={`shadow ${theme}`} mb='2px' fontSize={[ 4 ]} color='secondary'>[</Text> {t('openLoop')}</Text>
+          <Text width="45%" color='text'><Text className={`shadow ${theme}`} mb='2px' fontSize={[ 4 ]} color='secondary'>]</Text> {t('closeLoop')}</Text>
         </Flex>
         <Flex px={2} pt={4} pb={2}>
-          <Text mb="6px" fontSize={[ 3, 4 ]} color='secondary'>{t('Special Commands')}</Text>
+          <Text className={`shadow ${theme}`} mb="6px" fontSize={[ 3, 4 ]} color='secondary'>{t('Special Commands')}</Text>
         </Flex>
         <Flex px={2}>
-          <Text color='text'><Text fontSize={[ 4 ]} color='primary'>$ </Text>{t('Shortcut')}</Text>
+          <Text color='text'><Text className={`shadow ${theme}`} fontSize={[ 4 ]} color='primary'>$ </Text>{t('Shortcut')}</Text>
         </Flex>
-        <Flex px={2} py={4}>
-          <Text color='text'><Text fontSize={[ 4 ]} color='primary'># </Text>{t('Options')}</Text>
+        <Flex px={2} pt={4} pb={3}>
+          <Text color='text'><Text className={`shadow ${theme}`} fontSize={[ 4 ]} color='primary'># </Text>{t('Options')}</Text>
         </Flex>
         <Box px={[ 12 ]}>
           <Text color='text'>
-            <Text fontSize={[ 2 ]} color='primary' mb={[ 2 ]}>#printMode={'<option>'}</Text>
+            <Text className={`shadow ${theme}`} fontSize={[ 2 ]} color='primary' mb={[ 2 ]}>#printMode={'<option>'}</Text>
             &nbsp; {t('ShortcutText')} <Tooltip text={t('ShortcutTip')} />
             <Text color='secondary' mt={[ 1.5 ]}>&nbsp; {t('default')} = literal</Text>
           </Text>
           <br />
           <Text color='text'>
-            <Text fontSize={[ 2 ]} color='primary' mb={[ 2 ]}>#maxDepth={'<number>'}</Text>
+            <Text className={`shadow ${theme}`} fontSize={[ 2 ]} color='primary' mb={[ 2 ]}>#maxDepth={'<number>'}</Text>
             &nbsp; {t('OptionsText')} <Tooltip text={t('OptionsTip')} />
             <Text color='secondary' mt={[ 1.5 ]}>&nbsp; {t('default')} = 30000</Text>
           </Text>

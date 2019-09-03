@@ -5,11 +5,12 @@
 export const theme = {
     colors: {
         text: "#000",
-        background: "#FF6C11",
+        background: "#cd7f32",
         primary: "#132848",
         secondary: "#261447",
         muted: "#e2e2e2",
         gray: "#d0d0d0",
+        shadow: "#9999a0",
         highlight: "hsla(205, 100%, 40%, 0.125)"
     },
     fonts: {
@@ -17,7 +18,7 @@ export const theme = {
         heading: "inherit",
         monospace: "Menlo, monospace"
     },
-    fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 96],
+    fontSizes: [12, 14, 16, 20, 24, 32, 48, 56, 64, 96],
     fontWeights: {
         body: 400,
         heading: 700,

@@ -59,7 +59,7 @@ extends React.PureComponent<ContainerProps, State> {
         handleLegend={this.handleLegend}
         handleSubmit={this.handleSubmit}
         setTheme={this.setTheme}
-        theme={this.props.theme}
+        currentTheme={this.props.theme}
         input={this.state.input}
         result={this.state.result}
         locale={this.state.locale}

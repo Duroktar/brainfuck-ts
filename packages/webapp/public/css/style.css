@@ -25,6 +25,8 @@ form {
     background: -webkit-linear-gradient(-45deg,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 38%,rgba(0,0,0,0.25) 100%);
     background: linear-gradient(135deg,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 38%,rgba(0,0,0,0.25) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#40000000',GradientType=1 );
+
+    overflow-y: scroll;
 }
 
 .content {
@@ -35,13 +37,34 @@ form {
     position: absolute;
     top: 22px;
     z-index: 10;
-    right: 8px;
+    right: 12px;
+}
+
+.react-switch-bg {
+    box-shadow: inset 2px 2px 3px black;
+}
+
+.react-switch-handle {
+    box-shadow: 2px 2px 2px black;
+    user-select: none;
+    top: -0.5px !important;
+    left: -0.5px !important;
+}
+
+#source {
+    box-shadow: 2px 2px 20px 0px #00000054;
 }
 
 #title {
     left: 32px;
     position: relative;
-    text-shadow: 0 0 3px #FF0000;
+}
+
+#timestamp {
+    margin-top: 18px;
+    margin-right: -45px;
+    width: 50%;
+    float: right;
 }
 
 .theme-toggle {
@@ -78,7 +101,7 @@ form {
     color: #F0F0F0;
     border-radius: 10px;
     border-bottom: 4px solid #0045A6;
-    box-shadow: 2px 2px 6px #5d697a;
+    box-shadow: 2px 2px 6px #000000ad;
 
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -106,18 +129,27 @@ form {
 }
 
 #button:active {
-    box-shadow: 2px 2px 2px #5d697a;
+    box-shadow: 2px 2px 2px #000000ad;
     border-bottom: 1px solid #0045A6;
     transform: translateY(3px);
 }
 
 .badge {
-    box-shadow: 3px 3px 4px #5d697a;
+    box-shadow: 4px 4px 5px #000000da;
+    user-select: none;
+}
+
+.badge.dark {
+    box-shadow: 6px 6px 8px #000000;
     user-select: none;
 }
 
 .badge:active {
-    box-shadow: 1px 1px 2px #5d697a;
+    box-shadow: 2px 2px 2px #000000de;
+}
+
+.badge.dark:active {
+    box-shadow: 3px 3px 3px #000000;
 }
 
 .no-focus-outline a:focus,
@@ -156,6 +188,25 @@ form {
     background: -webkit-linear-gradient(-45deg,  rgba(103,108,112,1) 0%,rgba(78,84,89,1) 36%,rgba(40,52,59,1) 100%);
     background: linear-gradient(135deg,  rgba(103,108,112,1) 0%,rgba(78,84,89,1) 36%,rgba(40,52,59,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#676c70', endColorstr='#28343b',GradientType=1 );
+}
+
+.shadow.dark {
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.shadow.light {
+    text-shadow: 2px 2px 2px #9a9a9a;
+}
+
+#result {
+    box-shadow: inset 1px 1px 5px black;
+}
+
+#footer-items {
+    max-width: 580px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
 footer {

@@ -6,12 +6,12 @@ import merge from 'lodash.merge'
 import rebass from '@rebass/preset'
 import { BrainFuckContainer } from "./app/container";
 import { BrainFuckView } from "./app/component";
-import { themes, presets, Theme } from "./themes";
+import { themes, presets, ThemeName } from "./themes";
 
 const Main = () => {
-  const [ theme, setTheme ] = React.useState<Theme>(themes[0]);
+  const [ theme, setTheme ] = React.useState<ThemeName>(themes[0]);
 
-  const appTheme = merge({}, rebass, presets[theme])
+  const appTheme = React.useMemo(() => merge({}, rebass, presets[theme]), [theme])
 
   return (
     <ThemeProvider theme={appTheme}>

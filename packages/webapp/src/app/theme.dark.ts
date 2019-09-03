@@ -13,6 +13,7 @@ export const theme = {
         tertiary: "#FF6C11",
         muted: "#25282c",
         gray: "#373b41",
+        shadow: "#FF0000",
         highlight: "hsla(205, 100%, 40%, 0.125)"
     },
     fonts: {
@@ -20,7 +21,7 @@ export const theme = {
         heading: "inherit",
         monospace: "Menlo, monospace"
     },
-    fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 96],
+    fontSizes: [12, 14, 16, 20, 24, 32, 48, 56, 64, 96],
     fontWeights: {
         body: 400,
         heading: 700,
