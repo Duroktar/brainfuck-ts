@@ -39,7 +39,7 @@ export const Duroktar = React.memo(() => (
     href="https://github.com/duroktar"
     target="_blank"
     rel="noopener noreferrer"
-    color='background'
+    color='secondary'
     style={{textDecoration: 'none'}}
   >
     duroktar
