@@ -1,5 +1,10 @@
 import * as React from 'react';
 import * as BF from '@brainfuck/compiler';
+import i18n from "i18next";
+import Backend from 'i18next-xhr-backend';
+import LanguageDetector from 'i18next-browser-languagedetector';
+import { initReactI18next } from "react-i18next";
+import { i18Options } from './i18.options';
 import { BrainFuckView } from "./component";
 import { snippets, Snippets } from './snippets';
 
@@ -15,6 +20,7 @@ type State = {
   error?: Error;
   returnCode: number;
   result: string;
+  locale: string;
   time: Date | null;
   examples: Snippets;
   showLegend: boolean;
@@ -24,8 +30,23 @@ export class BrainFuckContainer
 extends React.PureComponent<ContainerProps, State> {
   private STORAGE_KEY = '__bf_storage__theme';
   public state: State = BrainFuckContainer.DEFAULT_STATE;
+  constructor(props: Readonly<ContainerProps>) {
+    super(props);
+    i18n
+      // load translation using xhr -> see /public/locales
+      // learn more: https://github.com/i18next/i18next-xhr-backend
+      .use(Backend)
+      // detect user language
+      // learn more: https://github.com/i18next/i18next-browser-languageDetector
+      .use(LanguageDetector)
+      // pass the i18n instance to react-i18next.
+      .use(initReactI18next)
+      // for all options read: https://www.i18next.com/overview/configuration-options
+      .init(i18Options);
+  }
   componentDidMount() {
     this.loadTheme().then(this.setTheme);
+    this.setState({ locale: i18n.language })
   }
   public render() {
     const { component: Component } = this.props;
@@ -41,6 +62,7 @@ extends React.PureComponent<ContainerProps, State> {
         theme={this.props.theme}
         input={this.state.input}
         result={this.state.result}
+        locale={this.state.locale}
         time={this.state.time}
         error={this.state.error}
         examples={this.state.examples}
@@ -163,5 +185,6 @@ extends React.PureComponent<ContainerProps, State> {
     time: null,
     examples: snippets,
     showLegend: false,
+    locale: '',
   };
 }

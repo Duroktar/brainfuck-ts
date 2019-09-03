@@ -11,7 +11,7 @@ export const theme = {
         primary: "#2DE2E6",  // blue
         secondary: "#FF3864",
         tertiary: "#FF6C11",
-        muted: "#242427",
+        muted: "#25282c",
         gray: "#373b41",
         highlight: "hsla(205, 100%, 40%, 0.125)"
     },
