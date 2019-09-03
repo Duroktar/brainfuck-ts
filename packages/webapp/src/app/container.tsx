@@ -166,7 +166,7 @@ extends React.PureComponent<ContainerProps, State> {
   }
   // TODO move all styles to css
   get dropStyle() {
-    return { width: 600, color: 'black', padding: 10 };
+    return { width: 660, color: 'black', padding: 10 };
   }
   private resetStateCtx = () => {
     this.setState({ ctx: {

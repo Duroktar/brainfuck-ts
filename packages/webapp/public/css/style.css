@@ -68,8 +68,22 @@ form {
 }
 
 .theme-toggle {
-    right: -180px;
+    transform: translateX(270%);
     top: 25px;
+}
+
+@media only screen and (max-width: 725px) {
+    .theme-toggle {
+        transform: translateX(150%);
+        top: 55px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .theme-toggle {
+        transform: translateX(100%);
+        top: 55px;
+    }
 }
 
 .react-switch-handle {
@@ -203,7 +217,7 @@ form {
 }
 
 #footer-items {
-    max-width: 580px;
+    max-width: 620px;
     width: 100%;
     display: flex;
     justify-content: space-between;
