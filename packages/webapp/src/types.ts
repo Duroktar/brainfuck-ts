@@ -4,3 +4,8 @@ export type ReactMouseClickEvent = (
         MouseEvent
     >
 ) => void;
+
+export type HtmlElementProps = React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLElement>,
+    HTMLElement
+>

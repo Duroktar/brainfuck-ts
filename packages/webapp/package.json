@@ -41,6 +41,8 @@
         "nodemon": "^1.19.1",
         "react": "^16.9.0",
         "react-dom": "^16.9.0",
+        "css-loader": "^3.2.0",
+        "style-loader": "^1.0.0",
         "ts-loader": "^6.0.4",
         "ts-node": "^8.3.0",
         "ts-node-dev": "^1.0.0-pre.42",

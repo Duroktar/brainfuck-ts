@@ -13,30 +13,11 @@ import { Theme } from '../themes';
 
 import './editor.mode';
 
-type Props = {
-  handleChange: (value: string, event?: any) => void;
-  handleCopy: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  handleDrop: (files: FileList | null, event: React.DragEvent<HTMLDivElement>) => any;
-  handleLegend: () => void;
-  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-  dropStyle: React.CSSProperties;
-  setTheme: (theme: string) => void;
-  currentTheme: 'light' | 'dark';
-  theme: Theme;
-  input: string;
-  locale: string;
-  result: any;
-  showLegend: boolean;
-  time: Date | null;
-  examples: Snippets;
-  error?: Error;
-}
-
 export const BrainFuckView =
 React.memo(withTheme((props: Props) => {
   const { t } = useTranslation();
   return (
-    <React.Suspense fallback={<div className='ace_editor-fallback'><Spinner /></div>}>
+    <React.Fragment>
       <Box id='page' backgroundColor='muted'>
         <Box id='page-overlay'>
           <If condition={props.showLegend} render={() => (
@@ -46,7 +27,7 @@ React.memo(withTheme((props: Props) => {
             <Flex justifyContent='center' px={12} py={12}>
               <Text
                 id='title'
-                fontSize={[8]}
+                fontSize={8}
                 fontWeight='bold'
                 color='primary'
                 sx={{textShadow: props.currentTheme === 'dark'
@@ -66,7 +47,7 @@ React.memo(withTheme((props: Props) => {
               />
             </Flex>
             <Flex justifyContent='center' px={12} py={12}>
-              <Text fontSize={[14]} fontWeight='bold' color='secondary'>
+              <Text fontWeight='bold' color='secondary'>
                 {t('examplesTitle')}
               </Text>
             </Flex>
@@ -76,8 +57,8 @@ React.memo(withTheme((props: Props) => {
               )} />
             </Flex>
             <Flex alignItems='center' px={12} py={12}>
-              <Box style={props.dropStyle} sx={{ mx: 'auto', py: 30, width: '100%' }}>
-                <React.Suspense fallback={<div className='ace_editor-fallback'><Spinner /></div>}>
+              <Box className='item-block' sx={{mx: 'auto', width: '100%'}}>
+                <React.Suspense fallback={<div className='ace_editor-fb'><Spinner /></div>}>
                   <form onSubmit={props.handleSubmit}>
                     <div id='copy' onClick={props.handleCopy} title='Copy to clipboard'>
                       <i className='fa fa-clipboard' aria-hidden='true' data-copytarget='#link' />
@@ -105,16 +86,22 @@ React.memo(withTheme((props: Props) => {
               </Box>
             </Flex>
             <Flex alignItems='center' px={12} py={12}>
-              <Box style={props.dropStyle} sx={{ mx: 'auto', px: 30, width: '100%' }}>
+              <Box className='item-block' sx={{mx: 'auto', px: 30, width: '100%'}}>
                 <FileDrop onDrop={props.handleDrop}>
-                  <Text color='secondary' style={{textShadow: '1px 1px 4px black'}}>
+                  <Text
+                    color='secondary'
+                    sx={{fontWeight: 'bold'}}
+                    style={{
+                      ...props.currentTheme === 'dark' && {textShadow: '1px 1px 4px black'}
+                    }}
+                  >
                     {t('fileDrop')}
                   </Text>
                 </FileDrop>
               </Box>
             </Flex>
             <Flex alignItems='center' px={12} pb={12} pt={10}>
-              <Box style={props.dropStyle} sx={{ mx: 'auto', px: 30, width: '100%' }}>
+              <Box className='item-block' sx={{mx: 'auto', px: 30, width: '100%'}}>
                 <Textarea
                   id='result'
                   name='result'
@@ -124,7 +111,7 @@ React.memo(withTheme((props: Props) => {
                   color='text'
                   placeholder={t('result')}
                   style={props.currentTheme === 'dark' ? { border: '0px' } : undefined}
-                  sx={{ maxWidth: '100%', minWidth: '100%', minHeight: '8em' }}
+                  sx={{maxWidth: '100%', minWidth: '100%', minHeight: '8em'}}
                   readOnly
                 />
               </Box>
@@ -132,9 +119,11 @@ React.memo(withTheme((props: Props) => {
           </Box>
           <If condition={props.error} render={error => (
             <Flex alignItems='center' height={0} px={12} py={0}>
-              <Box id='flip' style={props.dropStyle} height={0} sx={{ mx: 'auto', px: 30, py: 0, width: '100%' }}>
+              <Box id='flip' className='item-block' height={0} sx={{mx: 'auto', px: 30, width: '100%', py: 0}}>
                 <div><div>
-                  <Text sx={{position: 'absolute', fontWeight: 'bold'}} color='red'>{error!.message}</Text>
+                  <Text sx={{position: 'absolute', fontWeight: 'bold'}} color='red'>
+                    {error!.message}
+                  </Text>
                 </div></div>
               </Box>
             </Flex>
@@ -160,6 +149,24 @@ React.memo(withTheme((props: Props) => {
           </footer>
         </Box>
       </Box>
-    </React.Suspense>
+    </React.Fragment>
   )
 }))
+
+type Props = {
+  handleChange: (value: string, event?: any) => void;
+  handleCopy: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  handleDrop: (files: FileList | null, event: React.DragEvent<HTMLDivElement>) => any;
+  handleLegend: () => void;
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  setTheme: (theme: string) => void;
+  currentTheme: 'light' | 'dark';
+  theme: Theme;
+  input: string;
+  locale: string;
+  result: any;
+  showLegend: boolean;
+  time: Date | null;
+  examples: Snippets;
+  error?: Error;
+}

@@ -1,21 +1,26 @@
 import * as React from 'react';
 import { Box, Button, Link, Flex, Text } from 'rebass';
 import { useTranslation } from "react-i18next";
+import { withTheme } from 'emotion-theming';
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import { ReactMouseClickEvent, HtmlElementProps } from '../types';
+import { Theme, ThemeName } from '../themes';
 import { isNull, isNullOrUndefined } from 'util';
-import { ReactMouseClickEvent } from '../types';
+
+///////////////////////////////////////////////////////////////////////////////
 
 dayjs.extend(relativeTime)
 
+///////////////////////////////////////////////////////////////////////////////
+
 type BadgeProps = {
-  text: string;
-  bg?: string;
-  color?: string;
-  theme: string;
+  text:     string;
+  bg?:      string;
+  color?:   string;
+  theme:    string;
   onClick?: ReactMouseClickEvent;
 };
-
 export const Badge =
 React.memo(({ text, onClick, theme }: BadgeProps) => (
   <Box
@@ -35,6 +40,14 @@ React.memo(({ text, onClick, theme }: BadgeProps) => (
   </Box>
 ))
 
+///////////////////////////////////////////////////////////////////////////////
+
+const CloseButton = React.memo((props: HtmlElementProps) => (
+  <i className="fa fa-window-close" {...props}></i>
+))
+
+///////////////////////////////////////////////////////////////////////////////
+
 export const Duroktar = React.memo(() => (
   <Link
     href="https://github.com/duroktar"
@@ -47,19 +60,19 @@ export const Duroktar = React.memo(() => (
   </Link>
 ))
 
+///////////////////////////////////////////////////////////////////////////////
+
 type FancyButtonProps = {
-  text: React.ReactNode;
-  type?: string;
+  text:     React.ReactNode;
+  type?:    string;
   onClick?: ReactMouseClickEvent;
 };
-
 export const FancyButton =
 React.memo((props: FancyButtonProps) => (
   <span className="btn-wrapper">
     <Button
       id="button"
       sx={{ mt: '8px' }}
-      style={{textShadow: '1px 1px 1px black'}}
       onClick={props.onClick}
       type={props.type}
     >
@@ -68,15 +81,7 @@ React.memo((props: FancyButtonProps) => (
   </span>
 ))
 
-type IfProps<T> = {
-  condition: T;
-  render: (c: T) => React.ReactElement;
-};
-export const If = function<T>({
-  condition, render
-}: IfProps<T>) {
-  return !!condition ? render(condition) : null;
-}
+///////////////////////////////////////////////////////////////////////////////
 
 type ForEachProps<T> = {
   items:      T[];
@@ -102,56 +107,130 @@ export const ForEach = function <T>({
     </React.Fragment>)
 }
 
-type LegendProps = { onClick: any, theme: string }
+///////////////////////////////////////////////////////////////////////////////
+
+type IfProps<T> = {
+  condition:  T;
+  render:     (c: T) => React.ReactElement;
+};
+export const If = function<T>({
+  condition, render
+}: IfProps<T>) {
+  return !!condition ? render(condition) : null;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+type LegendProps = {
+  onClick:  (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+  theme:    ThemeName;
+}
 export const Legend = React.memo(({ onClick, theme }: LegendProps) => {
   const { t } = useTranslation();
+  const cNames = `shadow ${theme}`;
   return (
-    <Flex style={{position: 'absolute', width: '100%', top: 0, left: 0, right: 0, bottom: 0}} justifyContent='center' alignItems='center'>
-      <Box id='legend' className={theme} sx={{borderRadius: 8, zIndex: 12}} bg="gray" px={3} py={4} width={550}>
-        <Box width='100%' height={0} color='text'><i className="fa fa-window-close" style={{float: 'right'}} onMouseUp={onClick}></i></Box>
-        <Text className={`shadow ${theme}`} mb="6px" fontSize={[ 3, 4, 5 ]} color='primary'>{t('legend')}</Text>
-        <Flex justifyContent="space-evenly" sx={{marginBottom: '4px'}}>
-          <Text width="45%" color='text'><Text className={`shadow ${theme}`} mb='2px' fontSize={[ 4 ]} color='secondary'>{'>'}</Text> {t('incrementTape')}</Text>
-          <Text width="45%" color='text'><Text className={`shadow ${theme}`} mb='2px' fontSize={[ 4 ]} color='secondary'>{'<'}</Text> {t('decrementTape')}</Text>
+    <Flex className='cc-overlay'>
+      <Box id='legend' className={theme} bg="gray" px={3} py={4} width={550}>
+        <Box width='100%' height={0} color='text'>
+          <CloseButton style={{float: 'right'}} onMouseUp={onClick} />
+        </Box>
+        <Text className={cNames} mb="6px" fontSize={[3, 4, 5]} color='primary'>
+          {t('legend')}
+        </Text>
+        <Flex justifyContent="space-evenly" mb='4px'>
+          <LegendCell className={cNames} symbol='>' children={t('incrementTape')} />
+          <LegendCell className={cNames} symbol='<' children={t('decrementTape')} />
         </Flex>
-        <Flex justifyContent="space-evenly" sx={{marginBottom: '4px'}}>
-          <Text width="45%" color='text'><Text className={`shadow ${theme}`} mb='2px' fontSize={[ 4 ]} color='secondary'>+</Text> {t('incrementByte')}</Text>
-          <Text width="45%" color='text'><Text className={`shadow ${theme}`} mb='2px' fontSize={[ 4 ]} color='secondary'>-</Text> {t('decrementByte')}</Text>
+        <Flex justifyContent="space-evenly" mb='4px'>
+          <LegendCell className={cNames} symbol='+' children={t('incrementByte')} />
+          <LegendCell className={cNames} symbol='-' children={t('decrementByte')} />
         </Flex>
-        <Flex justifyContent="space-evenly" sx={{marginBottom: '4px'}}>
-          <Text width="45%" color='text'><Text className={`shadow ${theme}`} mb='2px' fontSize={[ 4 ]} color='secondary'>,</Text> {t('output')}</Text>
-          <Text width="45%" color='text'><Text className={`shadow ${theme}`} mb='2px' fontSize={[ 4 ]} color='secondary'>.</Text> {t('input')}</Text>
+        <Flex justifyContent="space-evenly" mb='4px'>
+          <LegendCell className={cNames} symbol=',' children={t('output')} />
+          <LegendCell className={cNames} symbol='.' children={t('input')} />
         </Flex>
-        <Flex justifyContent="space-evenly" sx={{marginBottom: '4px'}}>
-          <Text width="45%" color='text'><Text className={`shadow ${theme}`} mb='2px' fontSize={[ 4 ]} color='secondary'>[</Text> {t('openLoop')}</Text>
-          <Text width="45%" color='text'><Text className={`shadow ${theme}`} mb='2px' fontSize={[ 4 ]} color='secondary'>]</Text> {t('closeLoop')}</Text>
+        <Flex justifyContent="space-evenly" mb='4px'>
+          <LegendCell className={cNames} symbol='[' children={t('openLoop')} />
+          <LegendCell className={cNames} symbol=']' children={t('closeLoop')} />
         </Flex>
         <Flex px={2} pt={4} pb={2}>
-          <Text className={`shadow ${theme}`} mb="6px" fontSize={[ 3, 4 ]} color='secondary'>{t('Special Commands')}</Text>
+          <Text className={cNames} fontSize={[3, 4]} mb="6px" color='secondary'>
+            {t('Special Commands')}
+          </Text>
         </Flex>
         <Flex px={2}>
-          <Text color='text'><Text className={`shadow ${theme}`} fontSize={[ 4 ]} color='primary'>$ </Text>{t('Shortcut')}</Text>
+          <Text color='text'>
+            <Text className={cNames} fontSize={4} color='primary'>{'$ '}</Text>
+            {t('Shortcut')}
+          </Text>
         </Flex>
         <Flex px={2} pt={4} pb={3}>
-          <Text color='text'><Text className={`shadow ${theme}`} fontSize={[ 4 ]} color='primary'># </Text>{t('Options')}</Text>
+          <Text color='text'>
+            <Text className={cNames} fontSize={4} color='primary'>{'# '}</Text>
+            {t('Options')}
+          </Text>
         </Flex>
-        <Box px={[ 12 ]}>
-          <Text color='text'>
-            <Text className={`shadow ${theme}`} fontSize={[ 2 ]} color='primary' mb={[ 2 ]}>#printMode={'<option>'}</Text>
-            &nbsp; {t('ShortcutText')} <Tooltip text={t('ShortcutTip')} />
-            <Text color='secondary' mt={[ 1.5 ]}>&nbsp; {t('default')} = literal</Text>
-          </Text>
+        <Box px={12}>
+          <OptionCell
+            desc={'#printMode=<option>'}
+            text={t('ShortcutText')}
+            tip={t('ShortcutTip')}
+            def={`${t('default')} = literal`}
+          />
           <br />
-          <Text color='text'>
-            <Text className={`shadow ${theme}`} fontSize={[ 2 ]} color='primary' mb={[ 2 ]}>#maxDepth={'<number>'}</Text>
-            &nbsp; {t('OptionsText')} <Tooltip text={t('OptionsTip')} />
-            <Text color='secondary' mt={[ 1.5 ]}>&nbsp; {t('default')} = 30000</Text>
-          </Text>
+          <OptionCell
+            desc={'#maxDepth=<number>'}
+            text={t('OptionsText')}
+            tip={t('OptionsTip')}
+            def={`${t('default')} = 30000`}
+          />
         </Box>
       </Box>
     </Flex>
   )
 })
+
+///////////////////////////////////////////////////////////////////////////////
+
+type LegendCellProps = {
+  children:   React.ReactNode;
+  symbol:     string;
+  className:  string;
+};
+const LegendCell =
+React.memo(({ className, symbol, children }: LegendCellProps) => {
+  return (
+    <Text width="45%" color='text'>
+      <Text className={className} mb='2px' fontSize={[4]} color='secondary'>
+        {symbol}
+      </Text>
+      {children}
+    </Text>
+  )
+})
+
+///////////////////////////////////////////////////////////////////////////////
+
+type OptionCellProps = {
+  def:    React.ReactNode;
+  desc:   React.ReactNode;
+  text:   React.ReactNode;
+  tip:    string;
+  theme:  Theme;
+};
+const OptionCell = React.memo(
+withTheme(({ theme, desc, text, tip, def }: OptionCellProps) => {
+  const cName = `shadow ${theme}`;
+  return (
+    <Text color='text'>
+      <Text className={cName} fontSize={[2]} mb={[2]}>{desc}</Text>
+      &nbsp; {text} <Tooltip text={tip} />
+      <Text color='secondary' mt={[ 1.5 ]}>&nbsp; {def}</Text>
+    </Text>
+  )
+}))
+
+///////////////////////////////////////////////////////////////////////////////
 
 export const Spinner = React.memo(() => (
   <div className="lds-grid">
@@ -161,18 +240,23 @@ export const Spinner = React.memo(() => (
   </div>
 ))
 
+///////////////////////////////////////////////////////////////////////////////
+
 export const TimeStamp =
 React.memo(({ date }: { date: Date | null }) => {
-  const [time, setTime] = React.useState('never')
+  const [time, setTime] = React.useState('never');
+
   const callback = React.useCallback(() => {
     if (isNull(date)) return;
-    setTime(dayjs(date).fromNow())
-    return callback
-  }, [date])
+    setTime(dayjs(date).fromNow());
+    return callback;
+  }, [date]);
+
   React.useEffect(() => {
-    let timer = setInterval(callback(), 5000)
-    return () => clearInterval(timer)
-  }, [date])
+    let timer = setInterval(callback(), 5000);
+    return () => clearInterval(timer);
+  }, [date]);
+
   return (
     <React.Fragment>
       {time}
@@ -180,12 +264,17 @@ React.memo(({ date }: { date: Date | null }) => {
   )
 })
 
+///////////////////////////////////////////////////////////////////////////////
+
 export const Tooltip =
 React.memo(({ text }: { text: string }) => {
+  const cNames = "fa fa-question-circle icon-tooltip";
   return (
     <span className='tooltip' style={{marginLeft: '4px'}}>
-      <i className="fa fa-question-circle icon-tooltip" aria-hidden="true"></i>
+      <i className={cNames} aria-hidden="true"></i>
       <span className="tooltip-box">{text}</span>
     </span>
   )
 })
+
+///////////////////////////////////////////////////////////////////////////////

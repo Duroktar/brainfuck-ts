@@ -11,7 +11,7 @@ export const i18Options: i18n.InitOptions = {
                 "result": "Evaluate code and see the output here",
                 "evaluate": "Evaluate",
                 "reference": "(reference)",
-                "locale": "Locale:",
+                "locale": "Language:",
                 "createdBy": "Created by ",
                 "legend": "Legend",
                 "incrementTape": "Increment the data pointer (to point to the next cell to the right",

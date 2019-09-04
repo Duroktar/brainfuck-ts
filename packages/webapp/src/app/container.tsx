@@ -1,49 +1,13 @@
 import * as React from 'react';
 import * as BF from '@brainfuck/compiler';
 import i18n from "i18next";
-import Backend from 'i18next-xhr-backend';
-import LanguageDetector from 'i18next-browser-languagedetector';
-import { initReactI18next } from "react-i18next";
-import { i18Options } from './i18.options';
 import { BrainFuckView } from "./component";
 import { snippets, Snippets } from './snippets';
 
-type ContainerProps = {
-  component: typeof BrainFuckView;
-  setTheme: (theme: 'light' | 'dark') => void;
-  theme: 'light' | 'dark';
-};
-
-type State = {
-  input: string;
-  ctx: BF.Context;
-  error?: Error;
-  returnCode: number;
-  result: string;
-  locale: string;
-  time: Date | null;
-  examples: Snippets;
-  showLegend: boolean;
-};
-
-export class BrainFuckContainer
-extends React.PureComponent<ContainerProps, State> {
+export class BrainFuckContainer extends React.PureComponent<ContainerProps, State> {
   private STORAGE_KEY = '__bf_storage__theme';
   public state: State = BrainFuckContainer.DEFAULT_STATE;
-  constructor(props: Readonly<ContainerProps>) {
-    super(props);
-    i18n
-      // load translation using xhr -> see /public/locales
-      // learn more: https://github.com/i18next/i18next-xhr-backend
-      .use(Backend)
-      // detect user language
-      // learn more: https://github.com/i18next/i18next-browser-languageDetector
-      .use(LanguageDetector)
-      // pass the i18n instance to react-i18next.
-      .use(initReactI18next)
-      // for all options read: https://www.i18next.com/overview/configuration-options
-      .init(i18Options);
-  }
+
   componentDidMount() {
     this.loadTheme().then(this.setTheme);
     this.setState({ locale: i18n.language })
@@ -52,7 +16,6 @@ extends React.PureComponent<ContainerProps, State> {
     const { component: Component } = this.props;
     return (
       <Component
-        dropStyle={this.dropStyle}
         handleChange={this.handleChange}
         handleCopy={this.handleCopy}
         handleDrop={this.handleDrop}
@@ -147,26 +110,23 @@ extends React.PureComponent<ContainerProps, State> {
   };
   private loadTheme = async () => {
     const theme = localStorage.getItem(this.STORAGE_KEY)
-    return this.validTheme(theme) ? theme : null;
+    return this.isValidTheme(theme) ? theme : null;
   }
   private persistTheme = async (theme: string) => {
-    if (this.validTheme(theme)) {
+    if (this.isValidTheme(theme)) {
       localStorage.setItem(this.STORAGE_KEY, theme)
       return true
     }
     return false
   }
-  private validTheme(theme: string | null): theme is 'light' | 'dark' {
+  private isValidTheme(theme: string | null): theme is 'light' | 'dark' {
     return ['light', 'dark'].includes(theme || '')
   }
   public setTheme = (theme: string | null) => {
-    if (!this.validTheme(theme)) return;
-    this.props.setTheme(theme);
-    return this.persistTheme(theme);
-  }
-  // TODO move all styles to css
-  get dropStyle() {
-    return { width: 660, color: 'black', padding: 10 };
+    if (this.isValidTheme(theme)) {
+      this.props.setTheme(theme);
+      return this.persistTheme(theme);
+    }
   }
   private resetStateCtx = () => {
     this.setState({ ctx: {
@@ -188,3 +148,21 @@ extends React.PureComponent<ContainerProps, State> {
     locale: '',
   };
 }
+
+type ContainerProps = {
+  component: typeof BrainFuckView;
+  setTheme: (theme: 'light' | 'dark') => void;
+  theme: 'light' | 'dark';
+};
+
+type State = {
+  input: string;
+  ctx: BF.Context;
+  error?: Error;
+  returnCode: number;
+  result: string;
+  locale: string;
+  time: Date | null;
+  examples: Snippets;
+  showLegend: boolean;
+};
