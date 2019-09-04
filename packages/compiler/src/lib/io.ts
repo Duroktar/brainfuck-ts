@@ -49,8 +49,7 @@ export const debug = (state: State) => {
     p.addRow(row);
     p.addRow({ [`${state.tapeIndex}`]: '↑' }, { color: 'green' });
     p.printTable();
-    console.log(` TAPE:  Size    = ${state.tape.length}`);
-    console.log(`        Cursor  = ${state.tapeIndex}`);
+    console.log(` TAPE:  Size: ${state.tape.length}, Cursor: ${state.tapeIndex}`);
 
     // const msg2 = ` CHARS: size=${state.chars.length}; cursor=${state.charIndex} /`;
     // console.log(` CHARS: size=${state.chars.length}; cursor=${state.charIndex}`);
