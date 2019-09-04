@@ -2,20 +2,17 @@ import "@babel/polyfill";
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider } from 'emotion-theming';
-import merge from 'lodash.merge'
-import rebass from '@rebass/preset'
 import { BrainFuckContainer } from "./app/container";
 import { BrainFuckView } from "./app/component";
 import { themes, presets, ThemeName } from "./themes";
 
-import './style/style.css';
+import './styles';
 import './i18n';
 
 const Main = () => {
   const [ theme, setTheme ] = React.useState<ThemeName>(themes[0]);
 
-  const appTheme = React.useMemo(() =>
-    merge({}, rebass, presets[theme]), [theme])
+  const appTheme = React.useMemo(() => presets[theme], [theme])
 
   return (
     <ThemeProvider theme={appTheme}>
@@ -35,10 +32,3 @@ document.body.addEventListener('keyup', function(e) {
 });
 
 ReactDOM.render(<Main />, document.getElementById('root'));
-
-import './style/ace-tomorrow-night.css';
-import './style/clipboard.css';
-import './style/file-drop.css';
-import './style/flip.css';
-import './style/spinner.css';
-import './style/tooltip.css';

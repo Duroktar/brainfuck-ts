@@ -101,7 +101,7 @@ React.memo(withTheme((props: Props) => {
               </Box>
             </Flex>
             <Flex alignItems='center' px={12} pb={12} pt={10}>
-              <Box className='item-block' sx={{mx: 'auto', px: 30, width: '100%'}}>
+              <Box className='item-block' sx={{mx: 'auto', pl: 12, width: '100%'}}>
                 <Textarea
                   id='result'
                   name='result'
@@ -110,7 +110,7 @@ React.memo(withTheme((props: Props) => {
                   backgroundColor='gray'
                   color='text'
                   placeholder={t('result')}
-                  style={props.currentTheme === 'dark' ? { border: '0px' } : undefined}
+                  style={{...props.currentTheme === 'dark' && {border: '0px'}}}
                   sx={{maxWidth: '100%', minWidth: '100%', minHeight: '8em'}}
                   readOnly
                 />
@@ -119,7 +119,7 @@ React.memo(withTheme((props: Props) => {
           </Box>
           <If condition={props.error} render={error => (
             <Flex alignItems='center' height={0} px={12} py={0}>
-              <Box id='flip' className='item-block' height={0} sx={{mx: 'auto', px: 30, width: '100%', py: 0}}>
+              <Box id='flip' className='item-block' height={0} sx={{mx: 'auto', px: 30}}>
                 <div><div>
                   <Text sx={{position: 'absolute', fontWeight: 'bold'}} color='red'>
                     {error!.message}
@@ -135,7 +135,7 @@ React.memo(withTheme((props: Props) => {
                   <Text color="primary" width='auto'>{t('locale')}&nbsp;</Text>
                   <Text color="secondary" width='auto'>{props.locale}</Text>
                   <span className='tooltip' style={{marginLeft: '4px'}}>
-                    <i className="fa fa-question-circle icon-tooltip" aria-hidden="true"></i>
+                    <i className="fa fa-question-circle icon-tooltip" aria-hidden="true"/>
                     <span className="tooltip-box">{t('LanguageTip')}</span>
                   </span>
                 </Flex>
