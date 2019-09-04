@@ -118,6 +118,6 @@ To display the ASCII character "7" we must add 48 to the value 7
     < -
 ]
 
-$   Special debugging symbol. (Check out the developers console).
+$   Special debugging symbol (Check out the developers console)
 `,
 }

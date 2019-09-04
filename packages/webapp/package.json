@@ -1,5 +1,5 @@
 {
-    "name": "@brainfuck/webapp",
+    "name": "@brainfuck.ts/webapp",
     "version": "1.0.0",
     "main": "index.js",
     "license": "MIT",
@@ -13,8 +13,8 @@
         "@babel/polyfill": "^7.4.4",
         "@rebass/forms": "^4.0.5",
         "@rebass/preset": "^4.0.5",
-        "@brainfuck/compiler": "^1.0.0",
         "brace": "^0.11.1",
+        "brainfuck.ts": "^1.0.0",
         "dayjs": "^1.8.16",
         "emotion-theming": "^10.0.17",
         "i18next": "^17.0.13",
