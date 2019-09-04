@@ -9,7 +9,7 @@ import { Textarea } from '@rebass/forms';
 import { Badge, TimeStamp, FancyButton, If } from "./atoms";
 import { ForEach, Spinner, Duroktar, Legend } from "./atoms";
 import { Snippets } from './snippets';
-import { Theme } from '../themes';
+import { Theme } from '../theme';
 
 import './editor.mode';
 

@@ -5,7 +5,7 @@ import { withTheme } from 'emotion-theming';
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { ReactMouseClickEvent, HtmlElementProps } from '../types';
-import { Theme, ThemeName } from '../themes';
+import { Theme, ThemeName } from '../theme';
 import { isNull, isNullOrUndefined } from 'util';
 
 ///////////////////////////////////////////////////////////////////////////////

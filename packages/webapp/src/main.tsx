@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { ThemeProvider } from 'emotion-theming';
 import { BrainFuckContainer } from "./app/container";
 import { BrainFuckView } from "./app/component";
-import { themes, presets, ThemeName } from "./themes";
+import { themes, presets, ThemeName } from "./theme";
 
 import './styles';
 import './i18n';
