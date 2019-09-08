@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as BF from 'brainfuck.ts';
+import * as BF from 'brainfuck-ts';
 import i18n from "i18next";
 import { BrainFuckView } from "./component";
 import { snippets, Snippets } from './snippets';
