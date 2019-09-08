@@ -7,6 +7,7 @@
         "build": "tsc",
         "start:dev": "webpack-dev-server",
         "start": "node index.js",
+        "serve": "serve -l 9000 public",
         "webpack": "webpack"
     },
     "dependencies": {
@@ -26,7 +27,8 @@
         "react-i18next": "^10.12.2",
         "react-inspector": "^3.0.2",
         "react-switch": "^5.0.1",
-        "rebass": "^4.0.5"
+        "rebass": "^4.0.5",
+        "serve": "^11.1.0"
     },
     "devDependencies": {
         "@types/i18next": "13.0.0",
