@@ -1,4 +1,0 @@
-{
-    "watch": ["build/", "scripts/"],
-    "ext": "js, bf"
-  }
