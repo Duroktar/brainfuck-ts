@@ -1,7 +1,6 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
-        "declaration": false,                  /* Generates corresponding '.d.ts' file. */
         "declarationMap": false,               /* Generates a sourcemap for each corresponding '.d.ts' file. */
         "sourceMap": false,                    /* Generates corresponding '.map' file. */
         "removeComments": true                 /* Do not emit comments to output. */
