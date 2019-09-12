@@ -35,7 +35,9 @@ export const i18Options: i18n.InitOptions = {
         }
     },
     fallbackLng: "en",
-
+    react: {
+        useSuspense: false,
+    },
     interpolation: {
         escapeValue: false
     }

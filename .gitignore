@@ -89,5 +89,6 @@ typings/
 
 build/
 dist/
+public/
 
 .DS_Store
