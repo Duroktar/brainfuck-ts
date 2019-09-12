@@ -7,18 +7,20 @@
         "bf": "./bin/bf"
     },
     "scripts": {
-        "build": "tsc",
-        "start:dev": "nodemon index.js",
-        "start:repl": "nodemon build/repl.js",
-        "start": "node index.js"
+        "build": "npm run clean && cross-env NODE_ENV=production tsc -p tsconfig.prod.json",
+        "clean": "rimraf ./dist",
+        "start:repl": "nodemon dist/repl.js",
+        "start": "node dist/cli.js"
     },
     "dependencies": {
         "console-table-printer": "^1.0.0-beta20"
     },
     "devDependencies": {
-        "@types/node": "^12.7.4",
+        "@types/node": "^12.7.5",
+        "cross-env": "^5.2.1",
+        "rimraf": "^3.0.0",
         "ts-node": "^8.3.0",
         "ts-node-dev": "^1.0.0-pre.42",
-        "typescript": "^3.6.2"
+        "typescript": "^3.6.3"
     }
 }
